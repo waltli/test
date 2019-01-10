@@ -7,7 +7,7 @@
     <relativePath>../parent-prj/pom.xml</relativePath>
   </parent>
 
-  <groupId>com.qzsoft.oth.common</groupId>
+  <groupId>com.sbolo.syk.oth.common</groupId>
   <artifactId>tools</artifactId>
 
 <dependencies>
@@ -31,9 +31,9 @@
 	<groupId>com.alibaba</groupId>
 	<artifactId>fastjson</artifactId>
 </dependency>
-		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-websocket</artifactId>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-websocket</artifactId>
 </dependency>
 
 <dependency>
@@ -59,7 +59,7 @@
 	<plugin>
          <groupId>com.github.wvengen</groupId>
          <artifactId>proguard-maven-plugin</artifactId>
-         <version>2.0.13</version> <!-- 版本很重要，貌似这个版本才能支持java1.8的 -->
+         <!-- <version>2.0.13</version> --> <!-- 不写版本号，采用最新的版本 -->
          <executions>
              <execution>
                  <!-- 混淆时刻，这里是打包的时候混淆-->
@@ -71,78 +71,38 @@
              </execution>
          </executions>
          <configuration>
-         	 <!-- 是否混淆-->
-         	 <obfuscate>true</obfuscate>
-         	 <!-- 采用外部配置文件 -->
-             <proguardInclude>${basedir}/proguard.cfg</proguardInclude>
-             <!-- 是否将生成的PG文件安装部署-->
-             <attach>true</attach>
-             <!-- 指定生成文件分类 -->
-             <attachArtifactClassifier>proguard</attachArtifactClassifier>
-             <!--指定混淆的对象，对target目录下的classes目录进行混淆-->
-             <!-- <injar>classes</injar> -->
-             <!-- 混淆后输出的jar包名字，默认是 原包名-proguard.jar -->
-             <outjar>abc-pg.jar</outjar>  <!-- 设置了无效，原因不明 --> 
+         	<!-- 是否混淆-->
+         	<obfuscate>true</obfuscate>
+         	<!-- 采用外部配置文件 -->
+            <proguardInclude>${basedir}/proguard.cfg</proguardInclude>
+            <!-- 是否将生成的PG文件安装部署-->
+            <attach>true</attach>
+            <!-- 指定生成文件分类 -->
+            <attachArtifactClassifier>proguard</attachArtifactClassifier>
+            <!--指定混淆的对象，对target目录下的classes目录进行混淆-->
+            <!-- <injar>classes</injar> -->
+            <!-- 混淆后输出的jar包名字，默认是 原包名-proguard.jar -->
+            <outjar>abc-pg.jar</outjar>  <!-- 设置了无效，原因不明 --> 
+			<outputDirectory>${project.build.directory}</outputDirectory>
 			<libs>
-             <!-- 添加依赖，所混淆的jar包的依赖，必填，一个不能少，否则编译失败 -->
+                <!-- 添加java依赖，rt.jar必须添加 -->
 				<lib>${java.home}/lib/rt.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/commons-lang3-3.4.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/fastjson-1.1.41.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/okhttp-3.6.0.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/okio-1.11.0.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/slf4j-api-1.7.25.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/spring-boot-starter-websocket-1.5.8.RELEASE.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/aspectjweaver-1.8.11.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/commons-pool2-2.4.2.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/jcl-over-slf4j-1.7.25.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/jedis-2.9.0.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/jul-to-slf4j-1.7.25.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/log4j-over-slf4j-1.7.25.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/logback-classic-1.1.11.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/logback-core-1.1.11.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/snakeyaml-1.17.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/spring-boot-starter-web-1.5.8.RELEASE.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/spring-boot-starter-tomcat-1.5.8.RELEASE.jar</lib>
-				<lib>C:/Users/YY/Desktop/lib/tomcat-embed-core-8.5.23.jar</lib>
-				<lib>C:/Users/YY/Desktop/lib/tomcat-annotations-api-8.5.23.jar</lib>
-				<lib>C:/Users/YY/Desktop/lib/tomcat-embed-el-8.5.23.jar</lib>
-				<lib>C:/Users/YY/Desktop/lib/tomcat-embed-websocket-8.5.23.jar</lib>
-				<lib>C:/Users/YY/Desktop/lib/hibernate-validator-5.3.5.Final.jar</lib>
-				<lib>C:/Users/YY/Desktop/lib/validation-api-1.1.0.Final.jar</lib>
-				<lib>C:/Users/YY/Desktop/lib/jboss-logging-3.3.1.Final.jar</lib>
-				<lib>C:/Users/YY/Desktop/lib/classmate-1.3.4.jar</lib>
-				<lib>C:/Users/YY/Desktop/lib/jackson-databind-2.8.10.jar</lib>
-				<lib>C:/Users/YY/Desktop/lib/jackson-annotations-2.8.0.jar</lib>
-				<lib>C:/Users/YY/Desktop/lib/jackson-core-2.8.10.jar</lib>
-				<lib>C:/Users/YY/Desktop/lib/spring-web-4.3.12.RELEASE.jar</lib>
-				<lib>C:/Users/YY/Desktop/lib/spring-webmvc-4.3.12.RELEASE.jar</lib>
-				<lib>C:/Users/YY/Desktop/lib/spring-messaging-4.3.12.RELEASE.jar</lib>
-				<lib>C:/Users/YY/Desktop/lib/spring-websocket-4.3.12.RELEASE.jar</lib>
-				<lib>C:/Users/YY/Desktop/lib/spring-aop-4.3.12.RELEASE.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/spring-beans-4.3.12.RELEASE.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/spring-boot-1.5.8.RELEASE.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/spring-boot-autoconfigure-1.5.8.RELEASE.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/spring-boot-starter-1.5.8.RELEASE.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/spring-boot-starter-aop-1.5.8.RELEASE.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/spring-boot-starter-data-redis-1.5.8.RELEASE.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/spring-boot-starter-logging-1.5.8.RELEASE.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/spring-context-4.3.12.RELEASE.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/spring-context-support-4.3.12.RELEASE.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/spring-core-4.3.12.RELEASE.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/spring-data-commons-1.13.8.RELEASE.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/spring-data-keyvalue-1.2.8.RELEASE.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/spring-data-redis-1.8.8.RELEASE.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/spring-expression-4.3.12.RELEASE.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/spring-oxm-4.3.12.RELEASE.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/spring-tx-4.3.12.RELEASE.jar</lib>
-                <lib>C:/Users/YY/Desktop/lib/javassist-3.21.0-GA.jar</lib>
+				<lib>${java.home}/lib/jce.jar</lib>
+                <lib>${java.home}/lib/jsse.jar</lib>
             </libs>
             <addMavenDescriptor>false</addMavenDescriptor>
             <!-- 加载文件的过滤器，就是你的工程目录了-->
             <!-- <inFilter>/**</inFilter> -->
             <!-- 输出目录 -->
-            <outputDirectory>${project.build.directory}</outputDirectory>
-         </configuration>
+        </configuration>
+        <!-- 指定插件所使用的jar包以及版本 -->
+		<dependencies>
+			<dependency>
+				<groupId>net.sf.proguard</groupId>
+				<artifactId>proguard-base</artifactId>
+				<version>6.0.3</version>
+			</dependency>
+		</dependencies>
      </plugin>
 </plugins>
 </build>
