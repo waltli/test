@@ -5,7 +5,7 @@ import java.io.UnsupportedEncodingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.qzsoft.common.inner.BizUtils1;
+import com.sbolo.syk.common.inner.BizUtils1;
 
 import okhttp3.MediaType;
 import oth.common.ui.RequestResult;

@@ -1,6 +1,6 @@
 package oth.common.tools;
 
-import com.qzsoft.common.inner.UIDGenerator1;
+import com.sbolo.syk.common.inner.UIDGenerator1;
 
 public class IUIDGenerator {
 	public static long getUID() {

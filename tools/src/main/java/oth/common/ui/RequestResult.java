@@ -7,9 +7,6 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-import oth.common.exception.BusinessException;
-import oth.common.tools.IConfigUtil;
-
 /**
  * 
  * @author lihaopeng
@@ -40,15 +37,17 @@ public class RequestResult<T> implements Serializable {
 	private int pageLength;
 
 	private Boolean status = true;
+	private int code;
 	private String[] error;
-	private Integer code;
 	private Throwable throwable;
 
 	public RequestResult() {
+		this.code = 200;
 	}
 
 	public RequestResult(T obj) {
 		this.obj = obj;
+		this.code = 200;
 	}
 	
 	public RequestResult(List<T> list) {
@@ -57,6 +56,7 @@ public class RequestResult<T> implements Serializable {
 			this.listSize = list.size();
 			this.obj = list.get(0);
 		}
+		this.code = 200;
 	}
 
 	public RequestResult(List<T> list, long allRow, int currentPage, int pageSize) {
@@ -64,7 +64,7 @@ public class RequestResult<T> implements Serializable {
 		this.allRow = allRow;
 		this.currentPage = currentPage;
 		this.pageSize = pageSize;
-		
+		this.code = 200;
 		init();
 	}
 	
@@ -78,7 +78,6 @@ public class RequestResult<T> implements Serializable {
 		}
 	}
 	
-	@Deprecated
 	public static <T> RequestResult<T> error(String str) {
 		String[] strs = new String[]{str};
 		return error(strs);
@@ -91,32 +90,11 @@ public class RequestResult<T> implements Serializable {
 		return requestResult;
 	}
 
-//	public static <T> RequestResult<T> error(Integer code, String str) {
-//		RequestResult<T> requestResult = error(str);
-//		requestResult.setCode(code);
-//		return requestResult;
-//	}
-
 	public static <T> RequestResult<T> error(Throwable t) {
 		RequestResult<T> requestResult = new RequestResult<T>();
 		requestResult.setStatus(false);
 		requestResult.setThrowable(t);
-		Integer code = 10000;	//默认code
-		String error = IConfigUtil.getMessage(code);
-		if(t instanceof BusinessException){
-			BusinessException be = (BusinessException) t;
-			code = be.getCode();
-			error = be.getMessage();
-		}
-		requestResult.setError(error);
-		requestResult.setCode(code);
-		return requestResult;
-	}
-
-	public static <T> RequestResult<T> error(Integer code, Throwable t) {
-		RequestResult<T> requestResult = error(t);
-		requestResult.setError(IConfigUtil.getMessage(code));
-		requestResult.setCode(code);
+		requestResult.setError(t.getMessage());
 		return requestResult;
 	}
 
@@ -190,6 +168,14 @@ public class RequestResult<T> implements Serializable {
 
 	public void setSort(String sort) {
 		this.sort = sort;
+	}
+
+	public int getCode() {
+		return code;
+	}
+
+	public void setCode(int code) {
+		this.code = code;
 	}
 
 	/**
@@ -372,14 +358,6 @@ public class RequestResult<T> implements Serializable {
 
 	public void setPageLength(int pageLength) {
 		this.pageLength = pageLength;
-	}
-
-	public Integer getCode() {
-		return code;
-	}
-
-	public void setCode(Integer code) {
-		this.code = code;
 	}
 
 	public int getListSize() {

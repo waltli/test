@@ -24,10 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.sbolo.syk.common.annotation.CacheAvl;
-import com.sbolo.syk.common.annotation.CacheDel;
 import com.sbolo.syk.common.tools.DateUtil;
-import com.sbolo.syk.common.ui.RequestResult;
+
+import oth.common.ui.RequestResult;
 
 @Aspect
 @Component

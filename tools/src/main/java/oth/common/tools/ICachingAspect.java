@@ -3,7 +3,7 @@ package oth.common.tools;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import com.qzsoft.common.inner.aspect.CachingAspect1;
+import com.sbolo.syk.common.inner.aspect.CachingAspect1;
 
 public class ICachingAspect {
 

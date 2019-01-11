@@ -2,7 +2,9 @@
 @if(request.serverPort == 80 || request.serverPort == 443){
 	@serverPort = "";
 @}
-@var ctx = request.scheme+"://"+request.serverName+serverPort+ctxPath;
+@var host = request.serverName+serverPort+ctxPath;
+@var ctx = request.scheme+"://"+host;
+@pageCtx("host", host);
 @pageCtx("ctx", ctx);
 @pageCtx("ctxassets",ctx+"/assets");
 
@@ -16,6 +18,7 @@
 @}
 
 <script>
+ var host="${pageCtx('host')}";
  var ctx="${pageCtx('ctx')}";
  var ctxassets="${pageCtx('ctxassets')}";
  var availableParams = "${pageCtx('availableParams')}";

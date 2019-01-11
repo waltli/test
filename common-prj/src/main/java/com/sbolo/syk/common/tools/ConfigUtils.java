@@ -13,6 +13,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.sbolo.syk.common.exception.BusinessException;
 
+import oth.common.tools.IConfigUtil;
+
 /**
  * 
  * @author lihaopeng
@@ -21,44 +23,6 @@ import com.sbolo.syk.common.exception.BusinessException;
  * @description desc
  */
 public class ConfigUtils {
-
-	private static Properties properties;
-	
-	static{
-		try {
-			init();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	private static void init() throws IOException{
-		String[] configArr = new String[]{"/config_GP.properties", "/config_GE.properties", "/config_SP.properties", "/config_SE.properties"};
-		
-		InputStream inputStream = null;
-		InputStreamReader inputStreamReader = null;
-		properties = new Properties();
-		
-		for(String config : configArr) {
-			try {
-				inputStream = ConfigUtils.class.getResourceAsStream(config);
-				if(inputStream != null){
-					inputStreamReader = new InputStreamReader(inputStream, "utf-8");
-					properties.load(inputStreamReader);
-				}
-			}finally {
-				if(inputStreamReader != null) {
-					inputStreamReader.close();
-					inputStreamReader = null;
-				}
-				if(inputStream != null) {
-					inputStream.close();
-					inputStream = null;
-				}
-			}
-		}
-	}
-	
 	
 	/**
 	 * 获取配置文件的值
@@ -67,11 +31,7 @@ public class ConfigUtils {
 	 * @return
 	 */
 	public static String getPropertyValue(String key,String defaultValue){
-		String value = getPropertyValue(key);
-		if (StringUtils.isBlank(value)) {
-			return defaultValue;
-		}
-		return value;
+		return IConfigUtil.getPropertyValue(key, defaultValue);
 	}
 
 	/**
@@ -81,29 +41,6 @@ public class ConfigUtils {
 	 * @return
 	 */
 	public static String getPropertyValue(String key){
-		Object valueObj = properties.get(key);
-		if (valueObj == null) {
-			return null;
-		}
-		
-		String value = String.valueOf(valueObj);
-		
-		if (StringUtils.isBlank(value)) {
-			return null;
-		}
-		
-		Pattern p = Pattern.compile("\\$\\{(.*?)\\}");
-		Matcher m = p.matcher(valueObj.toString());
-		if(!m.find()){
-			return value;
-		}
-		String inner = m.group();
-		String innerKey = m.group(1);
-		String innerValue = getPropertyValue(innerKey);
-		if(StringUtils.isBlank(innerValue)) {
-			return value;
-		}
-		value = value.replace(inner, innerValue);
-		return value;
+		return IConfigUtil.getPropertyValue(key);
 	}
 }

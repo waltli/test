@@ -2,7 +2,7 @@ package oth.common.tools;
 
 import java.util.List;
 
-import com.qzsoft.common.inner.StringUtil1;
+import com.sbolo.syk.common.inner.StringUtil1;
 
 public class IStringUtil {
 	public static String toString(Object o) {

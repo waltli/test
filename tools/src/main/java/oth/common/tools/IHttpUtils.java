@@ -6,8 +6,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.qzsoft.common.inner.http.HttpClient;
-import com.qzsoft.common.inner.http.HttpUtils1;
+import com.sbolo.syk.common.inner.http.HttpClient;
+import com.sbolo.syk.common.inner.http.HttpUtils1;
 
 import okhttp3.OkHttpClient;
 import oth.common.http.HttpResult;

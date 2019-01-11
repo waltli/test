@@ -75,15 +75,11 @@
          	<obfuscate>true</obfuscate>
          	<!-- 采用外部配置文件 -->
             <proguardInclude>${basedir}/proguard.cfg</proguardInclude>
-            <!-- 是否将生成的PG文件安装部署-->
-            <attach>true</attach>
-            <!-- 指定生成文件分类 -->
-            <attachArtifactClassifier>proguard</attachArtifactClassifier>
-            <!--指定混淆的对象，对target目录下的classes目录进行混淆-->
-            <!-- <injar>classes</injar> -->
-            <!-- 混淆后输出的jar包名字，默认是 原包名-proguard.jar -->
-            <outjar>abc-pg.jar</outjar>  <!-- 设置了无效，原因不明 --> 
-			<outputDirectory>${project.build.directory}</outputDirectory>
+            <!-- 在 install 与 deploy 时将混淆的jar 文件也安装与部署，一旦设置后，后面的<outjar> 标签将会失效，
+             	并采用<attachArtifactClassifier>标签的值作为文件后缀 --> 
+            <!-- <attach>true</attach> -->
+            <!-- 指定生成文件分类，即已混淆的jar 文件名后面加上pg，后面的<outjar> 设置后此标签无效 -->
+            <!-- <attachArtifactClassifier>pg</attachArtifactClassifier> -->
 			<libs>
                 <!-- 添加java依赖，rt.jar必须添加 -->
 				<lib>${java.home}/lib/rt.jar</lib>
@@ -93,7 +89,12 @@
             <addMavenDescriptor>false</addMavenDescriptor>
             <!-- 加载文件的过滤器，就是你的工程目录了-->
             <!-- <inFilter>/**</inFilter> -->
+            <!--指定混淆的对象，对target目录下的classes目录进行混淆-->
+            <!-- <injar>classes</injar> -->
+            <!-- 混淆后输出的jar包名字，默认是 原包名-分类名.jar -->
+            <outjar>${project.build.finalName}.jar</outjar>
             <!-- 输出目录 -->
+			<outputDirectory>${project.build.directory}</outputDirectory>
         </configuration>
         <!-- 指定插件所使用的jar包以及版本 -->
 		<dependencies>

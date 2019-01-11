@@ -19,7 +19,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.alibaba.fastjson.JSON;
-import com.qzsoft.common.inner.aspect.PaginatorAspect1;
+import com.sbolo.syk.common.inner.aspect.PaginatorAspect1;
 
 public class IPaginatorAspect {
 	

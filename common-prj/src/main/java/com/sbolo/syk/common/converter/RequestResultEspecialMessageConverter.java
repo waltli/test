@@ -22,7 +22,8 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 
 import com.sbolo.syk.common.tools.Utils;
-import com.sbolo.syk.common.ui.RequestResult;
+
+import oth.common.ui.RequestResult;
 
 public class RequestResultEspecialMessageConverter<T> extends AbstractHttpMessageConverter<T> implements GenericHttpMessageConverter<T> {
 	private static final Logger LOG = LoggerFactory.getLogger(RequestResultEspecialMessageConverter.class);
